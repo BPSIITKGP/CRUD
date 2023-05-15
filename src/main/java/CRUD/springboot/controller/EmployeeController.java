@@ -36,10 +36,10 @@ public class EmployeeController {
         return new ResponseEntity<EmployeeEntity>(employeeService.saveEmployee(employeeEntity), HttpStatus.CREATED) ;
     }
 
-//    @PutMapping
-//    public EmployeeEntity updateEmployee(@RequestBody EmployeeEntity employeeEntity){
-//        return employeeService.updateEmployee(employeeEntity);
-//    }
+    @PutMapping
+    public EmployeeEntity updateEmployee(@RequestBody EmployeeEntity employeeEntity){
+        return employeeService.updateEmployee(employeeEntity);
+    }
 //
 //    @GetMapping("/{id}")
 //    public void deleteEmployee(@PathVariable("id") Long id){
