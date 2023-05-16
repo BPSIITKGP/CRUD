@@ -37,8 +37,8 @@ public class EmployeeController {
     }
 
     @PutMapping
-    public EmployeeEntity updateEmployee(@RequestBody EmployeeEntity employeeEntity){
-        return employeeService.updateEmployee(employeeEntity);
+    public ResponseEntity<EmployeeEntity> updateEmployee(@RequestBody EmployeeEntity employeeEntity){
+        return new ResponseEntity<EmployeeEntity>(employeeService.saveEmployee(employeeEntity), HttpStatus.CREATED) ;
     }
 //
 //    @GetMapping("/{id}")
