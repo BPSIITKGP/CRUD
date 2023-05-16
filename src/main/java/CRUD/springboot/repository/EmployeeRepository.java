@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
 
-    List<EmployeeEntity> findAll();
 
 }

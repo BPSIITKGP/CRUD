@@ -36,13 +36,26 @@ public class EmployeeController {
         return new ResponseEntity<EmployeeEntity>(employeeService.saveEmployee(employeeEntity), HttpStatus.CREATED) ;
     }
 
-    @PutMapping
-    public ResponseEntity<EmployeeEntity> updateEmployee(@RequestBody EmployeeEntity employeeEntity){
-        return new ResponseEntity<EmployeeEntity>(employeeService.saveEmployee(employeeEntity), HttpStatus.CREATED) ;
+    @PutMapping("/{id}")
+    public ResponseEntity<EmployeeEntity> updateEmployee(@RequestBody EmployeeEntity employeeEntity, @PathVariable("id") Long id){
+
+        Optional<EmployeeEntity> employeeEntity1 = Optional.ofNullable(employeeService.findById(id));
+        if (employeeEntity1.isPresent()) {
+            EmployeeEntity existingEmploy = employeeEntity1.get();
+
+            // Update the properties of the existing Employ
+            existingEmploy.setName(employeeEntity.getName());
+            existingEmploy.setDate(employeeEntity.getDate());
+            existingEmploy.setAddress(employeeEntity.getAddress());
+            existingEmploy.setGender(employeeEntity.getGender());
+            // Save the updated Employee
+            return new ResponseEntity<EmployeeEntity>(employeeService.saveEmployee(existingEmploy), HttpStatus.CREATED) ;
+        }
+        return new ResponseEntity<EmployeeEntity>(employeeService.updateEmployee(employeeEntity), HttpStatus.CREATED) ;
     }
 //
-//    @GetMapping("/{id}")
-//    public void deleteEmployee(@PathVariable("id") Long id){
-//         employeeService.deleteEmployee(id);
-//    }
+    @GetMapping("/delete/{id}")
+    public void deleteEmployee(@PathVariable("id") Long id){
+         employeeService.deleteEmployee(id);
+    }
 }
